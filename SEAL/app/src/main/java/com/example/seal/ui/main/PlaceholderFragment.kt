@@ -16,7 +16,7 @@ import com.example.seal.databinding.FragmentMainBinding
  */
 class PlaceholderFragment : Fragment() {
 
-    private lateinit var pageViewModel: PageViewModel
+
     private var _binding: FragmentMainBinding? = null
 
     // This property is only valid between onCreateView and
@@ -25,9 +25,7 @@ class PlaceholderFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        pageViewModel = ViewModelProvider(this).get(PageViewModel::class.java).apply {
-            setIndex(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1)
-        }
+
     }
 
     override fun onCreateView(
@@ -37,11 +35,13 @@ class PlaceholderFragment : Fragment() {
 
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         val root = binding.root
+ 
 //
 //        val textView: TextView = binding.sectionLabel
 //        pageViewModel.text.observe(viewLifecycleOwner, Observer {
 //            textView.text = it
 //        })
+ 
         return root
     }
 
