@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import androidx.lifecycle.ViewModel
 import com.example.seal.R
 
 private val TAB_TITLES = arrayOf(
@@ -18,7 +17,7 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager, va
     override fun getItem(position: Int): Fragment {
 
             when (position) {
-                0 -> return ClassFragment()
+                0 -> return ClassListFragment()
                 1 -> return HomeFragment()
                 else -> return SettingFragment()
             }
