@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.seal.MainActivity
 import com.example.seal.R
+import com.example.seal.databinding.FragmentSettingBinding
 
 
 class SettingFragment : Fragment() {
@@ -16,10 +18,18 @@ class SettingFragment : Fragment() {
     }
 
     override fun onCreateView(
+
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
+        val binding = FragmentSettingBinding.inflate(inflater, container, false)
+
+        binding.alarmTime.setOnClickListener{
+            val mActivity = activity as MainActivity
+            mActivity.gotoAlarmTimeFragment(SettingAlarmTimeFragment())
+        }
+
         return inflater.inflate(R.layout.fragment_setting, container, false)
     }
 
