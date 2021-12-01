@@ -71,18 +71,3 @@
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--
-
-    <TextView
-        android:id="@+id/class_name"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="50dp"
-        android:text="@string/class1"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/btn_add_item"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintHorizontal_weight="3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
--->

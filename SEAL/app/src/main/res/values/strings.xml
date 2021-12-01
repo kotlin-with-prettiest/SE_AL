@@ -6,10 +6,9 @@
 
 
     <string name="calendar_item_title">calendar item title</string>
-    <string name="calendar_item_context">calendar item context</string>
+    <string name="calendar_item_content">calendar item content</string>
     <string name="screen_change">화면전환</string>
     <string name="add_item">add</string>
-
 
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -45,5 +44,18 @@
     <string name="switch_homework">과제 알림</string>
     <string name="switch_exam">시험 알림</string>
 
+
+
+    <!--  alarm item base fragment  -->
+    <string name="alarm_item_name">alarm_name(과제1)</string>
+    <string name="alarm_item_date">2021-11-22 ~ 2021-11-22</string>
+    <string name="title">제목</string>
+    <string name="alarm_item_title">제목이 어쩌고저쩌고</string>
+    <string name="content">메모</string>
+    <string name="alarm_item_content">메모가 어쩌고 저쩌고</string>
+
+    <!--  setting alarm time fragment  -->
+    <string name="setting_alarm_time">알림 시간 설정</string>
+    <string name="save">저장</string>
 
 </resources>
