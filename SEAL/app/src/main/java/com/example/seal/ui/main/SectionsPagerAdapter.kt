@@ -19,9 +19,9 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager, va
     override fun getItem(position: Int): Fragment {
 
             when (position) {
-                0 -> return ClassAlarmSettingBaseFragment()
-                1 -> return SettingAlarmTimeFragment()
-                else -> return SettingFragment()
+                0 -> return AddAlarmFragment()
+                1 -> return CalendarItemFragment()
+                else -> return FixAlarmFragment()
             }
         }
 

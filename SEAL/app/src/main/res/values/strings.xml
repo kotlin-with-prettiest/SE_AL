@@ -57,5 +57,14 @@
     <!--  setting alarm time fragment  -->
     <string name="setting_alarm_time">알림 시간 설정</string>
     <string name="save">저장</string>
+    <string name="logout">로그아웃</string>
+
+    <!--  add alarm fragment  -->
+    <string name="category_class">강의</string>
+    <string name="date">날짜</string>
+    <string name="category_menu">구분</string>
+    <string name="slash">-</string>
+    <string name="delete">삭제</string>
+
 
 </resources>
