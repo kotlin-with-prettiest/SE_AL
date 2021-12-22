@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.seal.R
 
-class AlarmItemBaseFragment : Fragment() {
+class LoginFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,7 +19,8 @@ class AlarmItemBaseFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_alarm_item_base, container, false)
+        return inflater.inflate(R.layout.fragment_login, container, false)
     }
+
 
 }
