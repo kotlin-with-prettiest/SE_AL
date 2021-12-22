@@ -24,43 +24,32 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/home_recycler"
             android:layout_width="300dp"
-            android:layout_height="600dp"
-            android:layout_marginTop="100dp"
+            android:layout_height="550dp"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/back_transparent"
+            android:paddingBottom="?attr/actionBarSize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:paddingBottom="?attr/actionBarSize"
-            tools:listitem="@layout/fragment_calendar"/>
+            tools:listitem="@layout/fragment_calendar" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_float_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            app:backgroundTint="#FFD3D3"
+            android:clickable="true"
+            android:focusable="true"
+            app:fabSize="mini"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/upup" />
 
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    <!--        <CalendarView-->
-    <!--            android:id="@+id/calendar"-->
-    <!--            android:layout_width="300dp"-->
-    <!--            android:layout_height="300dp"-->
-    <!--            android:layout_marginTop="100dp"-->
-    <!--            app:layout_constraintEnd_toEndOf="parent"-->
-    <!--            app:layout_constraintStart_toStartOf="parent"-->
-    <!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-
-<!--     날짜 클릭 -->
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/calendar_item"-->
-<!--        android:layout_width="300dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:paddingBottom="?attr/actionBarSize"-->
-<!--        android:scrollbars="vertical"-->
-<!--        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/home_recycler"-->
-<!--        tools:listitem="@layout/fragment_calendar_item" />-->
-
-</androidx.constraintlayout.widget.ConstraintLayout>
-
-    </layout>
+</layout>
 
 

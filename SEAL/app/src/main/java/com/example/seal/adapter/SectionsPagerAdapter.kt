@@ -1,12 +1,13 @@
-package com.example.seal.ui.main
+package com.example.seal.adapter
 
 import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.example.seal.CalendarItemFragment
-import com.example.seal.LoginFragment
 import com.example.seal.R
+import com.example.seal.ui.main.ClassListFragment
+import com.example.seal.ui.main.HomeFragment
+import com.example.seal.ui.main.SettingFragment
 
 private val TAB_TITLES = arrayOf(
     R.string.tab_text_1,
@@ -19,9 +20,9 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager, va
     override fun getItem(position: Int): Fragment {
 
             when (position) {
-                0 -> return AddAlarmFragment()
-                1 -> return CalendarItemFragment()
-                else -> return FixAlarmFragment()
+                0 -> return ClassListFragment()
+                1 -> return HomeFragment()
+                else -> return SettingFragment()
             }
         }
 

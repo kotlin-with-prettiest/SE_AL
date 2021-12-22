@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string-array name="tab_title">
+        <item>강의목록</item>
+        <item>home</item>
+        <item>설정</item>
+    </string-array>
+
     <string-array name="date_type">
         <item>마감일</item>
         <item>업데이트일</item>
