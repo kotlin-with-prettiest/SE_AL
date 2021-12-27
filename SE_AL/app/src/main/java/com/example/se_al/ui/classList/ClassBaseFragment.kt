@@ -13,8 +13,6 @@ class ClassBaseFragment : Fragment() {
 
     private var _binding: FragmentClassBaseBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -25,6 +23,14 @@ class ClassBaseFragment : Fragment() {
 
         _binding = FragmentClassBaseBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        binding.btnAddItem.setOnClickListener {
+            findNavController().navigate(R.id.action_classBaseFragment_to_addAlarmFragment)
+        }
+
+        binding.btnSetting.setOnClickListener {
+            findNavController().navigate(R.id.action_classBaseFragment_to_classBaseAlarmSettingFragment)
+        }
 
 
         return root

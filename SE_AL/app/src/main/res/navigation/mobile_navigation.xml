@@ -29,5 +29,23 @@
     <fragment
         android:id="@+id/classBaseFragment"
         android:name="com.example.se_al.ui.ClassBase.ClassBaseFragment"
-        android:label="ClassBaseFragment" />
+        android:label="ClassBaseFragment" >
+        <action
+            android:id="@+id/action_classBaseFragment_to_classBaseAlarmSettingFragment"
+            app:destination="@id/classBaseAlarmSettingFragment" />
+        <action
+            android:id="@+id/action_classBaseFragment_to_addAlarmFragment"
+            app:destination="@id/addAlarmFragment" />
+        <action
+            android:id="@+id/action_classBaseFragment_to_navigation_class_list"
+            app:destination="@id/navigation_class_list" />
+    </fragment>
+    <fragment
+        android:id="@+id/classBaseAlarmSettingFragment"
+        android:name="com.example.se_al.ui.classList.ClassBaseAlarmSettingFragment"
+        android:label="ClassBaseAlarmSettingFragment" />
+    <fragment
+        android:id="@+id/addAlarmFragment"
+        android:name="com.example.se_al.ui.AddAlarmFragment"
+        android:label="AddAlarmFragment" />
 </navigation>
