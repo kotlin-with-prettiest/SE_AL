@@ -23,7 +23,6 @@ class ClassListFragment : BaseDataBindingFragment<FragmentClassListBinding>() {
 //            findNavController().navigateUp()
 //            findNavController().navigate(ClassListFragmentDirections.actionClassListFragmentToClassBaseFragment())
 //        }
-v
 //        dataBinding!!.class1.setOnClickListener {
 ////            performDoubleClick()
 //        }

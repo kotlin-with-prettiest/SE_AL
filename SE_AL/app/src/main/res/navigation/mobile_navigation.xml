@@ -15,11 +15,19 @@
         android:id="@+id/navigation_class_list"
         android:name="com.example.se_al.ui.classList.ClassListFragment"
         android:label="@string/title_classlist"
-        tools:layout="@layout/fragment_class_list" />
+        tools:layout="@layout/fragment_class_list" >
+        <action
+            android:id="@+id/action_navigation_class_list_to_classBaseFragment"
+            app:destination="@id/classBaseFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_setting"
         android:name="com.example.se_al.ui.setting.SettingFragment"
         android:label="@string/title_setting"
         tools:layout="@layout/fragment_setting" />
+    <fragment
+        android:id="@+id/classBaseFragment"
+        android:name="com.example.se_al.ui.ClassBase.ClassBaseFragment"
+        android:label="ClassBaseFragment" />
 </navigation>
