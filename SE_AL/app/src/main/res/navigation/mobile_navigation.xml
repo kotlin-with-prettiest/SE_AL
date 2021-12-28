@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.example.se_al.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_homeDashboardFragment"
+            app:destination="@id/homeDashboardFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_class_list"
@@ -34,18 +38,56 @@
             android:id="@+id/action_classBaseFragment_to_classBaseAlarmSettingFragment"
             app:destination="@id/classBaseAlarmSettingFragment" />
         <action
-            android:id="@+id/action_classBaseFragment_to_addAlarmFragment"
-            app:destination="@id/addAlarmFragment" />
-        <action
             android:id="@+id/action_classBaseFragment_to_navigation_class_list"
             app:destination="@id/navigation_class_list" />
+        <action
+            android:id="@+id/action_classBaseFragment_to_alarmAddFragment"
+            app:destination="@id/alarmAddFragment" />
+        <action
+            android:id="@+id/action_classBaseFragment_to_alarmBaseListFragment"
+            app:destination="@id/alarmBaseListFragment" />
     </fragment>
     <fragment
         android:id="@+id/classBaseAlarmSettingFragment"
         android:name="com.example.se_al.ui.classList.ClassBaseAlarmSettingFragment"
-        android:label="ClassBaseAlarmSettingFragment" />
+        android:label="ClassBaseAlarmSettingFragment" >
+        <action
+            android:id="@+id/action_classBaseAlarmSettingFragment_to_classBaseFragment"
+            app:destination="@id/classBaseFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/addAlarmFragment"
-        android:name="com.example.se_al.ui.AddAlarmFragment"
-        android:label="AddAlarmFragment" />
+        android:id="@+id/alarmAddFragment"
+        android:name="com.example.se_al.ui.AlarmAddFragment"
+        android:label="AlarmAddFragment" >
+        <action
+            android:id="@+id/action_alarmAddFragment_to_classBaseFragment"
+            app:destination="@id/classBaseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/alarmFixFragment"
+        android:name="com.example.se_al.ui.AlarmFixFragment"
+        android:label="AlarmFixFragment" >
+        <action
+            android:id="@+id/action_alarmFixFragment_to_alarmBaseListFragment"
+            app:destination="@id/alarmBaseListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/alarmBaseListFragment"
+        android:name="com.example.se_al.ui.AlarmBaseListFragment"
+        android:label="AlarmBaseListFragment" >
+        <action
+            android:id="@+id/action_alarmBaseListFragment_to_alarmFixFragment"
+            app:destination="@id/alarmFixFragment" />
+        <action
+            android:id="@+id/action_alarmBaseListFragment_to_classBaseFragment"
+            app:destination="@id/classBaseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeDashboardFragment"
+        android:name="com.example.se_al.ui.home.HomeDashboardFragment"
+        android:label="HomeDashboardFragment" >
+        <action
+            android:id="@+id/action_homeDashboardFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 </navigation>
