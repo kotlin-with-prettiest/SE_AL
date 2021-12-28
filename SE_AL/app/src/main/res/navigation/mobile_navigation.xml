@@ -46,6 +46,9 @@
         <action
             android:id="@+id/action_classBaseFragment_to_alarmBaseListFragment"
             app:destination="@id/alarmBaseListFragment" />
+        <action
+            android:id="@+id/action_classBaseFragment_to_alarmFixFragment"
+            app:destination="@id/alarmFixFragment" />
     </fragment>
     <fragment
         android:id="@+id/classBaseAlarmSettingFragment"

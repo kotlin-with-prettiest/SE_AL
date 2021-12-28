@@ -14,13 +14,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content" >
 
             <TextView
-                android:id="@+id/fix_category_class"
+                android:id="@+id/add_str_category_class"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="30dp"
@@ -32,19 +31,19 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Spinner
-                android:id="@+id/spinner_class"
+                android:id="@+id/add_spinner_class"
                 android:layout_width="230dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="50dp"
                 android:background="@color/purple_700"
                 android:spinnerMode="dialog"
-                app:layout_constraintStart_toEndOf="@+id/fix_category_class"
+                app:layout_constraintStart_toEndOf="@+id/add_str_category_class"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
             <TextView
-                android:id="@+id/fix_category_menu"
+                android:id="@+id/add_str_category_menu"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="30dp"
@@ -53,22 +52,22 @@
                 android:text="@string/category_menu"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fix_category_class" />
+                app:layout_constraintTop_toBottomOf="@+id/add_str_category_class" />
 
             <Spinner
-                android:id="@+id/spinner_menu"
+                android:id="@+id/add_spinner_menu"
                 android:layout_width="230dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:background="@color/purple_200"
                 android:spinnerMode="dialog"
-                app:layout_constraintStart_toEndOf="@+id/fix_category_menu"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_class" />
+                app:layout_constraintStart_toEndOf="@+id/add_str_category_menu"
+                app:layout_constraintTop_toBottomOf="@+id/add_spinner_class" />
 
 
             <TextView
-                android:id="@+id/add_alarm_date"
+                android:id="@+id/add_str_alarm_date"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="30dp"
@@ -77,49 +76,49 @@
                 android:text="@string/date"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fix_category_menu" />
+                app:layout_constraintTop_toBottomOf="@+id/add_str_category_menu" />
 
 
             <EditText
-                android:id="@+id/editText_start_date"
+                android:id="@+id/add_start_date"
                 android:layout_width="120dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"
                 android:inputType="date"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toStartOf="@+id/editText_start_time"
-                app:layout_constraintStart_toEndOf="@+id/add_alarm_date"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_menu"
+                app:layout_constraintEnd_toStartOf="@+id/add_start_time"
+                app:layout_constraintStart_toEndOf="@+id/add_str_alarm_date"
+                app:layout_constraintTop_toBottomOf="@+id/add_spinner_menu"
                 tools:text="2021-11-10" />
 
             <EditText
-                android:id="@+id/editText_start_time"
+                android:id="@+id/add_start_time"
                 android:layout_width="60dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
                 android:inputType="time"
                 android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@id/editText_start_date"
-                app:layout_constraintTop_toBottomOf="@id/spinner_menu"
+                app:layout_constraintStart_toEndOf="@id/add_start_date"
+                app:layout_constraintTop_toBottomOf="@id/add_spinner_menu"
                 tools:text="10:00" />
 
 
             <TextView
-                android:id="@+id/slash"
+                android:id="@+id/add_slash"
                 android:layout_width="10dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:text="@string/slash"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toStartOf="@+id/editText_end_date"
+                app:layout_constraintEnd_toStartOf="@+id/add_end_date"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/editText_start_time"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_menu" />
+                app:layout_constraintStart_toEndOf="@+id/add_start_time"
+                app:layout_constraintTop_toBottomOf="@+id/add_spinner_menu" />
 
             <EditText
-                android:id="@+id/editText_end_date"
+                android:id="@+id/add_end_date"
                 android:layout_width="120dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="90dp"
@@ -127,23 +126,23 @@
                 android:inputType="date"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/editText_start_date"
+                app:layout_constraintTop_toBottomOf="@id/add_start_date"
                 tools:text="2021-11-11" />
 
             <EditText
-                android:id="@+id/editText_end_time"
+                android:id="@+id/add_end_time"
                 android:layout_width="60dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
                 android:inputType="time"
                 android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@id/editText_end_date"
-                app:layout_constraintTop_toBottomOf="@id/editText_start_time"
+                app:layout_constraintStart_toEndOf="@id/add_end_date"
+                app:layout_constraintTop_toBottomOf="@id/add_start_time"
                 tools:text="11:11" />
 
 
             <TextView
-                android:id="@+id/add_alarm_title"
+                android:id="@+id/add_str_title"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="30dp"
@@ -152,23 +151,23 @@
                 android:text="@string/title"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText_end_date" />
+                app:layout_constraintTop_toBottomOf="@+id/add_end_date" />
 
             <EditText
-                android:id="@+id/editText_title"
+                android:id="@+id/add_title"
                 android:layout_width="230dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:ems="15"
                 android:tooltipText="title"
-                app:layout_constraintStart_toEndOf="@+id/add_alarm_title"
-                app:layout_constraintTop_toBottomOf="@+id/editText_end_date"
+                app:layout_constraintStart_toEndOf="@+id/add_str_title"
+                app:layout_constraintTop_toBottomOf="@+id/add_end_date"
                 tools:text="제목제목제목" />
 
 
             <TextView
-                android:id="@+id/add_alarm_content"
+                android:id="@+id/add_str_memo"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="30dp"
@@ -177,18 +176,18 @@
                 android:text="@string/content"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/add_alarm_title" />
+                app:layout_constraintTop_toBottomOf="@+id/add_str_title" />
 
             <EditText
-                android:id="@+id/editText_content"
+                android:id="@+id/add_memo"
                 android:layout_width="230dp"
                 android:layout_height="150dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:scrollbars="vertical"
                 android:gravity="top"
-                app:layout_constraintStart_toEndOf="@+id/add_alarm_content"
-                app:layout_constraintTop_toBottomOf="@+id/editText_title"
+                app:layout_constraintStart_toEndOf="@+id/add_str_memo"
+                app:layout_constraintTop_toBottomOf="@+id/add_title"
                 tools:text="메모메dfssssssssssssssssssssssssssssssss모메모" />
 
             <Button
@@ -196,14 +195,15 @@
                 android:layout_width="80dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="40dp"
-                android:layout_marginBottom="40dp"
+                android:layout_marginTop="40dp"
                 android:text="@string/save"
                 android:textSize="12sp"
+                app:layout_constraintTop_toBottomOf="@id/add_memo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

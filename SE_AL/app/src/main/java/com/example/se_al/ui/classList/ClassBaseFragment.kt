@@ -26,6 +26,7 @@ class ClassBaseFragment : Fragment() {
 
         binding.btnAddItem.setOnClickListener {
             findNavController().navigate(R.id.action_classBaseFragment_to_alarmAddFragment)
+//            findNavController().navigate(R.id.action_classBaseFragment_to_alarmFixFragment)
         }
 
         binding.btnSetting.setOnClickListener {
