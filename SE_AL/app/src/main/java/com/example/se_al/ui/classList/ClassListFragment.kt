@@ -34,10 +34,6 @@ class ClassListFragment : Fragment() {
             findNavController().navigate(R.id.action_navigation_class_list_to_classBaseFragment)
         }
 
-//        val textView: TextView = binding.textDashboard
-//        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
-//            textView.text = it
-//        })
         return root
     }
 
