@@ -25,7 +25,14 @@
         android:id="@+id/navigation_setting"
         android:name="com.example.se_al.ui.setting.SettingFragment"
         android:label="@string/title_setting"
-        tools:layout="@layout/fragment_setting" />
+        tools:layout="@layout/fragment_setting" >
+        <action
+            android:id="@+id/action_navigation_setting_to_settingAlarmTimeFragment"
+            app:destination="@id/settingAlarmTimeFragment" />
+        <action
+            android:id="@+id/action_navigation_setting_to_settingPersonalInfoFragment"
+            app:destination="@id/settingPersonalInfoFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/classBaseFragment"
@@ -91,5 +98,13 @@
         android:id="@+id/navigation_home_dashboard"
         android:name="com.example.se_al.ui.home.HomeDashboardFragment"
         android:label="HomeDashboardFragment" />
+    <fragment
+        android:id="@+id/settingAlarmTimeFragment"
+        android:name="com.example.se_al.ui.setting.SettingAlarmTimeFragment"
+        android:label="SettingAlarmTimeFragment" />
+    <fragment
+        android:id="@+id/settingPersonalInfoFragment"
+        android:name="com.example.se_al.ui.setting.SettingPersonalInfoFragment"
+        android:label="SettingPersonalInfoFragment" />
 
 </navigation>
