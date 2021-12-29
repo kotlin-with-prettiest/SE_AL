@@ -25,11 +25,16 @@ class ClassBaseFragment : Fragment() {
         val root: View = binding.root
 
         binding.btnAddItem.setOnClickListener {
-            findNavController().navigate(R.id.action_classBaseFragment_to_addAlarmFragment)
+            findNavController().navigate(R.id.action_classBaseFragment_to_alarmAddFragment)
+//            findNavController().navigate(R.id.action_classBaseFragment_to_alarmFixFragment)
         }
 
         binding.btnSetting.setOnClickListener {
             findNavController().navigate(R.id.action_classBaseFragment_to_classBaseAlarmSettingFragment)
+        }
+
+        binding.homework.setOnClickListener {
+            findNavController().navigate(R.id.action_classBaseFragment_to_alarmBaseListFragment)
         }
 
 

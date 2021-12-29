@@ -4,12 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.se_al.R
+import com.example.se_al.databinding.ActivityMainBinding
 import com.example.se_al.databinding.FragmentHomeBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeFragment : Fragment() {
 
@@ -31,10 +37,22 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+        
+        //화면전환 해야함
+//        binding.btnScreenChange.setOnClickListener {
+//            
+//            val navView : BottomNavigationView = ActivityMainBinding.inflate(layoutInflater).navView
+//            val navController = findNavController(R.id.nav_host_fragment_activity_main)
+//
+//            val appBarConfiguration = AppBarConfiguration(setOf(
+//                R.id.navigation_class_list, R.id.navigation_home_dashboard, R.id.navigation_setting))
+//            setupActionBarWithNavController(navController, appBarConfiguration)
+//            navView.setupWithNavController(navController)
+//
+//
+//        }
+
+
         return root
     }
 

@@ -1,15 +1,15 @@
-package com.example.se_al.ui.classList
+package com.example.se_al.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.se_al.databinding.FragmentClassBaseAlarmSettingBinding
+import com.example.se_al.databinding.FragmentHomeDashboardBinding
 
-class ClassBaseAlarmSettingFragment  : Fragment() {
+class HomeDashboardFragment : Fragment() {
 
-    private var _binding: FragmentClassBaseAlarmSettingBinding? = null
+    private var _binding: FragmentHomeDashboardBinding? = null
 
     private val binding get() = _binding!!
 
@@ -19,7 +19,7 @@ class ClassBaseAlarmSettingFragment  : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentClassBaseAlarmSettingBinding.inflate(inflater, container, false)
+        _binding = FragmentHomeDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
 

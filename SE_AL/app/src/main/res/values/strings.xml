@@ -11,6 +11,13 @@
     <string name="title_setting">Setting</string>
 
 
+
+    <string name="calendar_item_title">calendar item title</string>
+    <string name="calendar_item_content">calendar item content</string>
+    <string name="screen_change">화면전환</string>
+    <string name="add_item">add</string>
+
+
     <!--  class list fragment  -->
     <string name="class1">class 1</string>
     <string name="class2">class 2</string>
