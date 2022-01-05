@@ -8,7 +8,7 @@
     android:layout_height="match_parent" >
 
     <Button
-        android:id="@+id/btn_screen_change"
+        android:id="@+id/btn_screen_change_to_calendar"
         android:layout_width="80dp"
         android:layout_height="40dp"
         android:layout_marginTop="40dp"
@@ -26,7 +26,7 @@
         android:layout_height="0dp"
         android:paddingBottom="?attr/actionBarSize"
         android:scrollbars="vertical"
-        app:layout_constraintTop_toBottomOf="@id/btn_screen_change"
+        app:layout_constraintTop_toBottomOf="@id/btn_screen_change_to_calendar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

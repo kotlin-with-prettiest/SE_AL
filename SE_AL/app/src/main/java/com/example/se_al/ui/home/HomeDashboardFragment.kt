@@ -16,15 +16,15 @@ class HomeDashboardFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
 
         _binding = FragmentHomeDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-
         return root
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
