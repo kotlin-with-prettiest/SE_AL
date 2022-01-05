@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home_calendar">
+    app:startDestination="@id/navigation_home_dashboard">
 
     <fragment
-        android:id="@+id/navigation_home_calendar"
-        android:name="com.example.se_al.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/navigation_home_dashboard"
+        android:name="com.example.se_al.ui.home.HomeDashboardFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_home_dashboard" />
+
 
     <fragment
         android:id="@+id/navigation_class_list"
@@ -94,10 +95,6 @@
             app:destination="@id/classBaseFragment" />
     </fragment>
 
-    <fragment
-        android:id="@+id/navigation_home_dashboard"
-        android:name="com.example.se_al.ui.home.HomeDashboardFragment"
-        android:label="HomeDashboardFragment" />
     <fragment
         android:id="@+id/settingAlarmTimeFragment"
         android:name="com.example.se_al.ui.setting.SettingAlarmTimeFragment"
