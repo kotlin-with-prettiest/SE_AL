@@ -41,6 +41,10 @@ class HomeFragment : Fragment() {
         return root
     }
 
+    fun goDashboard(){
+        val intent = Intent(this@HomeFragment.context, DashboardActivity::class.java)
+        startActivity(intent)
+    }
 
 
     override fun onDestroyView() {

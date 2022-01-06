@@ -25,12 +25,15 @@
         <entry key="..\:/Users/hyxxsj/Desktop/SE_AL/SE_AL/app/src/main/res/layout/fragment_alarm_base_item.xml" value="0.2206405693950178" />
         <entry key="..\:/Users/hyxxsj/Desktop/SE_AL/SE_AL/app/src/main/res/layout/fragment_alarm_base_list.xml" value="0.25118483412322273" />
         <entry key="..\:/Users/hyxxsj/Desktop/SE_AL/SE_AL/app/src/main/res/layout/fragment_alarm_fix.xml" value="0.264" />
+        <entry key="..\:/Users/hyxxsj/Desktop/SE_AL/SE_AL/app/src/main/res/layout/fragment_cc.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/hyxxsj/Desktop/SE_AL/SE_AL/app/src/main/res/layout/fragment_class.xml" value="0.253125" />
         <entry key="..\:/Users/hyxxsj/Desktop/SE_AL/SE_AL/app/src/main/res/layout/fragment_class_alarm_setting_base.xml" value="0.21014492753623187" />
         <entry key="..\:/Users/hyxxsj/Desktop/SE_AL/SE_AL/app/src/main/res/layout/fragment_class_base.xml" value="0.128" />
         <entry key="..\:/Users/hyxxsj/Desktop/SE_AL/SE_AL/app/src/main/res/layout/fragment_class_base_alarm_setting.xml" value="0.1" />
         <entry key="..\:/Users/hyxxsj/Desktop/SE_AL/SE_AL/app/src/main/res/layout/fragment_class_list.xml" value="0.1" />
         <entry key="..\:/Users/hyxxsj/Desktop/SE_AL/SE_AL/app/src/main/res/layout/fragment_dashboard.xml" value="0.176" />
+        <entry key="..\:/Users/hyxxsj/Desktop/SE_AL/SE_AL/app/src/main/res/layout/fragment_dd.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/hyxxsj/Desktop/SE_AL/SE_AL/app/src/main/res/layout/fragment_hh.xml" value="0.1" />
         <entry key="..\:/Users/hyxxsj/Desktop/SE_AL/SE_AL/app/src/main/res/layout/fragment_home.xml" value="0.2" />
         <entry key="..\:/Users/hyxxsj/Desktop/SE_AL/SE_AL/app/src/main/res/layout/fragment_home_calendar.xml" value="0.20425724637681159" />
         <entry key="..\:/Users/hyxxsj/Desktop/SE_AL/SE_AL/app/src/main/res/layout/fragment_home_calendar_alarm_list.xml" value="0.20425724637681159" />
@@ -42,6 +45,7 @@
         <entry key="..\:/Users/hyxxsj/Desktop/SE_AL/SE_AL/app/src/main/res/layout/fragment_setting_alarm_time.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/hyxxsj/Desktop/SE_AL/SE_AL/app/src/main/res/menu/bottom_nav_menu.xml" value="0.253125" />
         <entry key="..\:/Users/hyxxsj/Desktop/SE_AL/SE_AL/app/src/main/res/menu/bottom_nav_menu2.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/hyxxsj/Desktop/SE_AL/SE_AL/app/src/main/res/menu/bottom_nav_menu_calendar.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/hyxxsj/Desktop/SE_AL/SE_AL/app/src/main/res/menu/bottom_nav_menu_dashboard.xml" value="0.25364583333333335" />
       </map>
     </option>
