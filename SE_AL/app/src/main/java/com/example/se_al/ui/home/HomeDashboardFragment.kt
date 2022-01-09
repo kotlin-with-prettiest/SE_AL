@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.se_al.databinding.FragmentHomeDashboardBinding
 
-class HomeDashboardFragment : Fragment() {
+class HomeDashboardFragment  : Fragment() {
 
     private var _binding: FragmentHomeDashboardBinding? = null
 
@@ -16,15 +16,15 @@ class HomeDashboardFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ): View? {
 
         _binding = FragmentHomeDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+
         return root
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

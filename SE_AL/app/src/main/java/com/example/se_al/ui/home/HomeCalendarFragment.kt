@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.se_al.databinding.FragmentCcBinding
+import com.example.se_al.databinding.FragmentHomeCalendarBinding
 
-class CcFragment : Fragment() {
+class HomeCalendarFragment : Fragment() {
 
-    private var _binding: FragmentCcBinding? = null
+    private var _binding: FragmentHomeCalendarBinding? = null
 
     private val binding get() = _binding!!
 
@@ -19,7 +19,7 @@ class CcFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentCcBinding.inflate(inflater, container, false)
+        _binding = FragmentHomeCalendarBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
 
