@@ -1,47 +1,61 @@
 package com.example.se_al.ui.home
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.example.se_al.DashboardActivity
-import com.example.se_al.MainActivity
+import com.example.se_al.R
 import com.example.se_al.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
+
     private var _binding: FragmentHomeBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+
+    var flag: Int = -1
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        //화면전환
-        binding.btnScreenChangeToDashboard.setOnClickListener {
-            val intent = Intent(this@HomeFragment.context, DashboardActivity::class.java)
-            startActivity(intent)
+
+
+        if (flag < 0) {
+            Log.d("first flag", flag.toString())
+            flag = 0
+            childFragmentManager.beginTransaction()
+                .replace(R.id.home_layout, HomeCalendarFragment()).commit()
+        }
+
+
+        binding.btnScreenChange.setOnClickListener {
+            Log.d("click flag", flag.toString())
+
+            if (flag == 0) {
+                flag += 1
+                childFragmentManager.beginTransaction()
+                    .replace(R.id.home_layout, HomeDashboardFragment()).commit()
+                binding.btnFloatUp.visibility= View.VISIBLE
+            } else {
+                flag -= 1
+                childFragmentManager.beginTransaction()
+                    .replace(R.id.home_layout, HomeCalendarFragment()).commit()
+                binding.btnFloatUp.visibility= View.INVISIBLE
+            }
         }
 
         return root
     }
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()

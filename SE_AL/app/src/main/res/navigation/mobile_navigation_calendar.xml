@@ -11,6 +11,7 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
+
     <fragment
         android:id="@+id/navigation_class_list"
         android:name="com.example.se_al.ui.classList.ClassListFragment"

@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.se_al.databinding.FragmentHomeDashboardBinding
+import com.example.se_al.databinding.FragmentHomeCalendarBinding
 
-class HomeDashboardFragment  : Fragment() {
+class HomeCalendarFragment : Fragment() {
 
-    private var _binding: FragmentHomeDashboardBinding? = null
+    private var _binding: FragmentHomeCalendarBinding? = null
 
     private val binding get() = _binding!!
 
@@ -19,7 +19,7 @@ class HomeDashboardFragment  : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentHomeDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentHomeCalendarBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
 

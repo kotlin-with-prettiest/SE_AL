@@ -13,19 +13,14 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    var ft = supportFragmentManager
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
-//        val btn: Button = findViewById(R.id.btn_screen_change_to_dashboard)
-//        btn.setOnClickListener {
-//            val intent = Intent(this, DashboardActivity::class.java)
-//            startActivity(intent)
-//
-//        }
 
         val navView: BottomNavigationView = binding.navView
 
@@ -42,3 +37,4 @@ class MainActivity : AppCompatActivity() {
 
 
 }
+
