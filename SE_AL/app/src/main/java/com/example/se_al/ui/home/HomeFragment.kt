@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.se_al.MainActivity
 import com.example.se_al.R
 import com.example.se_al.databinding.FragmentHomeBinding
 
@@ -16,9 +17,6 @@ class HomeFragment : Fragment() {
 
     private val binding get() = _binding!!
 
-    var flag: Int = -1
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -27,31 +25,12 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        
 
-
-
-        if (flag < 0) {
-            Log.d("first flag", flag.toString())
-            flag = 0
-            childFragmentManager.beginTransaction()
-                .replace(R.id.home_layout, HomeCalendarFragment()).commit()
-        }
-
+        screenMaintain()
 
         binding.btnScreenChange.setOnClickListener {
-            Log.d("click flag", flag.toString())
-
-            if (flag == 0) {
-                flag += 1
-                childFragmentManager.beginTransaction()
-                    .replace(R.id.home_layout, HomeDashboardFragment()).commit()
-                binding.btnFloatUp.visibility= View.VISIBLE
-            } else {
-                flag -= 1
-                childFragmentManager.beginTransaction()
-                    .replace(R.id.home_layout, HomeCalendarFragment()).commit()
-                binding.btnFloatUp.visibility= View.INVISIBLE
-            }
+            screenChange()
         }
 
         return root
@@ -60,5 +39,37 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+
+    fun screenChange(){
+        Log.d("before flag", MainActivity.flag.home_flag.toString())
+        if (MainActivity.flag.home_flag == 0) {
+            MainActivity.flag.home_flag = 1
+            childFragmentManager.beginTransaction()
+                .replace(R.id.home_layout, HomeDashboardFragment()).commit()
+            binding.btnFloatUp.visibility= View.VISIBLE
+        } else {
+            MainActivity.flag.home_flag = 0
+            childFragmentManager.beginTransaction()
+                .replace(R.id.home_layout, HomeCalendarFragment()).commit()
+            binding.btnFloatUp.visibility= View.INVISIBLE
+        }
+        Log.d("after flag", MainActivity.flag.home_flag.toString())
+    }
+
+
+    fun screenMaintain(){
+        Log.d("before maintain flag", MainActivity.flag.home_flag.toString())
+        if (MainActivity.flag.home_flag == 0) {
+            childFragmentManager.beginTransaction()
+                .replace(R.id.home_layout, HomeCalendarFragment()).commit()
+            binding.btnFloatUp.visibility= View.INVISIBLE
+        } else {
+            childFragmentManager.beginTransaction()
+                .replace(R.id.home_layout, HomeDashboardFragment()).commit()
+            binding.btnFloatUp.visibility= View.VISIBLE
+        }
+        Log.d("after maintain flag", MainActivity.flag.home_flag.toString())
     }
 }
