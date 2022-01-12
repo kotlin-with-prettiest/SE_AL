@@ -9,19 +9,15 @@ import com.example.se_al.databinding.ActivityLoginBinding
 import kotlinx.android.synthetic.main.activity_login.*
 
 
-
 class LoginActivity: AppCompatActivity() {
 
 
     private lateinit var binding: ActivityLoginBinding
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_login)
-
 
         //로그인 버튼
         btn_login.setOnClickListener {
@@ -29,11 +25,7 @@ class LoginActivity: AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
-
     }
-
-
 
 }
 
