@@ -15,6 +15,7 @@
     <string name="add_item">add</string>
 
 
+
     <!--  class list fragment  -->
     <string name="class1">class 1</string>
     <string name="class2">class 2</string>
@@ -67,5 +68,10 @@
     <string name="delete">삭제</string>
     <string name="homework1">과제1</string>
     <string name="add_sign">+</string>
+
+    <!--    login   -->
+    <string name="login">Login</string>
+    <string name="id">ID</string>
+    <string name="password">Password</string>
 
 </resources>
