@@ -9,11 +9,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.se_al.databinding.ActivityMainBinding
 
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
-    var ft = supportFragmentManager
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,8 +31,12 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-
     }
+
+    object flag {
+        var home_flag : Int = 0
+    }
+
 
 
 }
