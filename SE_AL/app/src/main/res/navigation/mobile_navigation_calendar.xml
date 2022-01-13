@@ -54,6 +54,9 @@
         <action
             android:id="@+id/action_classBaseFragment_to_alarmFixFragment"
             app:destination="@id/alarmFixFragment" />
+        <action
+            android:id="@+id/action_classBaseFragment_to_courseBaseListFragment"
+            app:destination="@id/courseBaseListFragment" />
     </fragment>
 
     <fragment
@@ -103,5 +106,9 @@
         android:id="@+id/settingPersonalInfoFragment"
         android:name="com.example.se_al.ui.setting.SettingPersonalInfoFragment"
         android:label="SettingPersonalInfoFragment" />
+    <fragment
+        android:id="@+id/courseBaseListFragment"
+        android:name="com.example.se_al.ui.CourseBaseListFragment"
+        android:label="CourseBaseListFragment" />
 
 </navigation>
