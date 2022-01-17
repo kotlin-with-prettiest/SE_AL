@@ -1,16 +1,11 @@
 package com.example.se_al
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.TextView
+import android.view.inputmethod.InputMethodManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -37,6 +32,7 @@ import org.jsoup.Connection
 import org.jsoup.Jsoup
 import java.lang.Exception
 
+val TAG = "main"
 
 class MainActivity : AppCompatActivity() {
 
@@ -66,6 +62,17 @@ class MainActivity : AppCompatActivity() {
         //noti()
 
     }
+
+//    fun CloseKeyboard() {
+//        var view = this.currentFocus
+//
+//        if (view != null) {
+//            val inputMethodManager =
+//                getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//            inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+//        }
+//        Log.d(TAG, "hide keyboard")
+//    }
 
     object flag {
         var home_flag : Int = 0
