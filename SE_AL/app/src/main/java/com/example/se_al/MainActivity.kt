@@ -5,6 +5,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.provider.DocumentsContract
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
@@ -15,6 +16,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.work.ExistingWorkPolicy
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.Worker
 import com.example.se_al.data.UserDatabase
 import com.example.se_al.data.announcement.Announcement
 import com.example.se_al.data.assignment.Assignment
@@ -35,12 +40,17 @@ import org.jetbrains.anko.doAsync
 import org.json.JSONObject
 import org.jsoup.Connection
 import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
+import org.jsoup.nodes.DocumentType
 import java.lang.Exception
+import java.util.concurrent.TimeUnit
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
+    private val backgroundCoroutineScope = CoroutineScope(Dispatchers.Default)
 
     private val id = ""
     private val password = ""
@@ -62,6 +72,8 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        delayCreateWork()
+
         login()
         //noti()
 
@@ -69,6 +81,21 @@ class MainActivity : AppCompatActivity() {
 
     object flag {
         var home_flag : Int = 0
+    }
+
+    private fun delayCreateWork(){
+        backgroundCoroutineScope.launch {
+            createWorkManager()
+        }
+    }
+
+    private fun createWorkManager(){
+
+        val oneTimeWorkRequest = OneTimeWorkRequestBuilder<Worker>().
+        setInitialDelay(1, TimeUnit.MINUTES).build()
+
+        Log.d("test", "Init WorkManager")
+        //WorkManager.getInstance(applicationContext).enqueueUniqueWork(Worker.WORK_NAME, ExistingWorkPolicy.KEEP, oneTimeWorkRequest)
     }
 
     private fun login() {
@@ -79,6 +106,14 @@ class MainActivity : AppCompatActivity() {
                 .cookies(uisCookies)
                 .ignoreContentType(true)
                 .get();
+
+            if(loginResponse.select("script").toString()=="<script>alert('비정상적인 접근입니다.');window.close();</script>"){
+                Log.d("로그인 결과","flase")
+            }
+            else
+                Log.d("로그인 결과","True")
+            Log.d("로그인 반응",loginResponse.toString())
+            Log.d("로그인 반응",loginResponse.select("script").toString())
 
             val location = loginResponse.toString().split("location")[1].split("\"")[1]
             val session = getSession(location)
