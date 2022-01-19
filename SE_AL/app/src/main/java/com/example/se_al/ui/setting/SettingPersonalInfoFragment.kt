@@ -26,7 +26,7 @@ class SettingPersonalInfoFragment : Fragment() {
         val root: View = binding.root
 
         //로그아웃 버튼
-        binding.btnLogout.setOnClickListener {
+        binding.btnInit.setOnClickListener {
             val intent = Intent(this@SettingPersonalInfoFragment.context, LoginActivity::class.java)
             startActivity(intent)
             activity?.finish()
