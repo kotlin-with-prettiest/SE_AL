@@ -4,7 +4,7 @@ import androidx.room.*
 
 @Dao
 interface MenuDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(menu: Menu)
 
     @Update

@@ -1,14 +1,11 @@
 package com.example.se_al.data.calendar
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import androidx.room.util.TableInfo
 
 @Dao
 interface CalendarDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(calendar: Calendar)
 
     @Update

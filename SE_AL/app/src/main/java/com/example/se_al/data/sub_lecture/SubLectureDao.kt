@@ -1,13 +1,10 @@
 package com.example.se_al.data.sub_lecture
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 
 @Dao
 interface SubLectureDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(subLecture: SubLecture)
 
     @Update

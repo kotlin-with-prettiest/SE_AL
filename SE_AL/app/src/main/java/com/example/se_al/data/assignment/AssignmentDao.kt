@@ -1,14 +1,11 @@
 package com.example.se_al.data.assignment
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 
 @Dao
 interface AssignmentDao {
     // 과제를 직접 추가할 때
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(assignment: Assignment)
 
     @Update

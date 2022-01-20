@@ -4,7 +4,7 @@ import androidx.room.*
 
 @Dao
 interface AnnouncementDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(announcement: Announcement)
 
     @Update
