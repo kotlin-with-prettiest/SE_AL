@@ -4,7 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.se_al.MainActivity
 import com.example.se_al.R
@@ -28,13 +31,16 @@ class LoginActivity : AppCompatActivity() {
         }
 
 
-
         //로그인 버튼
         btn_login.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-            Log.d(TAG, "main Activity")
+
+            val id = editTextId.text.toString()
+            val pw = editTextPassword.text.toString()
+
+//            checkIdPw(id, pw)
+
+
+
             CloseKeyboard()
 
 //            login()
@@ -55,7 +61,27 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-
+//    fun checkIdPw(id:String, pw:String){
+//        if (id.isEmpty() || pw.isEmpty()) {
+//            val toast = Toast.makeText(this@LoginActivity, "아이디와 비밀번호를 입력해주세요", Toast.LENGTH_SHORT)
+////                toast.setGravity(Gravity.TOP, 0, 0)
+//            toast.show()
+//            Log.d(TAG, "empty id or pw")
+//        } else {
+//            val toast = Toast.makeText(this@LoginActivity, "id : $id / pw : $pw", Toast.LENGTH_SHORT)
+////                toast.setGravity(Gravity.TOP, 0 , 0)
+//            toast.show()
+//            Log.d(TAG, "fill id and pw")
+//
+//
+//            val intent = Intent(this, MainActivity::class.java)
+//            intent.putExtra("bb_id_input",id)
+//            intent.putExtra("bb_password_input",pw)
+//            startActivity(intent)
+//            finish()
+//            Log.d(TAG, "main Activity")
+//        }
+//    }
 
 
 }

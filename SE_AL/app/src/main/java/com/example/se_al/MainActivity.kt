@@ -61,6 +61,11 @@ class MainActivity : AppCompatActivity() {
         login()
         //noti()
 
+
+        var bb_id_input = intent.getStringExtra("bb_id_input")
+        var bb_password_input = intent.getStringExtra("bb_password_input")
+        Log.d(TAG, bb_id_input + bb_password_input)
+
     }
 
 //    fun CloseKeyboard() {
