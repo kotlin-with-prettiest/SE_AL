@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="SampleData"
+            type="com.example.se_al.SampleData" />
+
+        <variable
+            name="viewModel"
+            type="com.example.se_al.ui.AlarmBaseListViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/alarm_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textSize="20sp"
+            android:text="@{SampleData.name}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/alarm_item_name"/>
+
+
+        <TextView
+            android:id="@+id/alarm_item_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@{SampleData.date}"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/alarm_item_name"
+            tools:text="@string/alarm_item_date" />
+
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="30dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/alarm_item_date" />
+
+        <TextView
+            android:id="@+id/alarm_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@{SampleData.title}"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/title"
+            app:layout_constraintTop_toBottomOf="@id/alarm_item_date"
+            tools:text="@string/alarm_item_title" />
+
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="30dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/content"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
+
+        <TextView
+            android:id="@+id/alarm_item_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@{SampleData.memo}"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/content"
+            app:layout_constraintTop_toBottomOf="@+id/alarm_item_title"
+            tools:text="@string/alarm_item_content" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
