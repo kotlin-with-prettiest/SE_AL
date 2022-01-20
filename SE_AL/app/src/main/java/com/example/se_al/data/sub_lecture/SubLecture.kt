@@ -11,10 +11,8 @@ data class SubLecture(
     var body: String?,
     var memo: String?,
     var parent_id: String,
-    var sub_lecture_id: String,
+    @PrimaryKey var sub_lecture_id: String,
     var start_date: String?,
     var end_date: String?,
     var created: String,
-){
-    @PrimaryKey(autoGenerate = true) var id: Int = 0
-}
+)

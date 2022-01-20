@@ -59,6 +59,7 @@
     <string name="setting_alarm_time">알림 시간 설정</string>
     <string name="save">저장</string>
     <string name="logout">로그아웃</string>
+    <string name="init">앱 초기화</string>
 
     <!--  add alarm fragment  -->
     <string name="category_class">강의</string>

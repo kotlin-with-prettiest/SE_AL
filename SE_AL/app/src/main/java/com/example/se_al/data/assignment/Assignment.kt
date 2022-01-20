@@ -10,11 +10,9 @@ data class Assignment(
     var title: String,
     var body: String?,
     var memo: String?,
-    var assignment_id: String,
+    @PrimaryKey var assignment_id: String,
     var source_id: String?,
     var start_date: String?,
     var end_date: String?,
     var created: String,
-){
-    @PrimaryKey(autoGenerate = true) var id: Int = 0
-}
+)
