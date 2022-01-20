@@ -35,8 +35,6 @@ class LoginActivity : AppCompatActivity() {
             CloseKeyboard()
         }
 
-        val context = this
-
         //로그인 버튼
         btn_login.setOnClickListener {
 
@@ -46,8 +44,6 @@ class LoginActivity : AppCompatActivity() {
             val id = findViewById<TextView>(R.id.editTextId).text.toString()
             val pw = findViewById<TextView>(R.id.editTextPassword).text.toString()
             val intent = Intent(this, MainActivity::class.java)
-
-            insertUser(id, pw)
 
             doAsync {
                // 로그인 성공
@@ -59,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
                    Log.d(TAG, "main Activity")
                    CloseKeyboard()
 
-//                   insertUser(id, pw)
+                   insertUser(id, pw, applicationContext)
                }
                // 로그인 실패
                else {
@@ -86,8 +82,8 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    private fun insertUser(id: String, pw: String) {
-        Login.login(id, pw)
+    private fun insertUser(id: String, pw: String, context: Context) {
+        Login.login(id, pw, context)
     }
 }
 

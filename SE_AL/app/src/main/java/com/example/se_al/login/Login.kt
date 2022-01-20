@@ -1,7 +1,6 @@
 package com.example.se_al.login
 
-import android.util.Log
-import com.example.se_al.MainActivity
+import android.content.Context
 import com.example.se_al.data.UserDatabase
 import com.example.se_al.data.user.User
 import kotlinx.coroutines.CoroutineScope
@@ -13,7 +12,7 @@ import org.jsoup.Connection
 import org.jsoup.Jsoup
 
 object Login {
-    fun login(id: String, pw: String) {
+    fun login(id: String, pw: String, context: Context) {
         doAsync {
             val uisCookies = uisLogin(id, pw)
 
@@ -25,7 +24,7 @@ object Login {
             val location = loginResponse.toString().split("location")[1].split("\"")[1]
             val session = getSession(location)
 
-            callApi(location, session, id, pw)
+            callApi(location, session, id, pw, context)
         }
     }
 
@@ -48,10 +47,10 @@ object Login {
         return authLink.cookies()
     }
 
-    private fun callApi(location: String, session: Map<String, String>, id: String, pw: String) {
+    private fun callApi(location: String, session: Map<String, String>, id: String, pw: String, context: Context) {
         val userId = getUserId(location)
 
-        getAllCourses(userId, session, id, pw)
+        getAllCourses(userId, session, id, pw, context)
     }
 
     private fun getUserId(location: String): String {
@@ -60,7 +59,7 @@ object Login {
         return doc.select("script#initial-context-script").toString().split("id\":\"")[2].split("\"")[0].replace(" ", "")
     }
 
-    private fun getAllCourses(userId: String, session: Map<String, String>, id: String, pw: String) {
+    private fun getAllCourses(userId: String, session: Map<String, String>, id: String, pw: String, context: Context) {
         val url = "https://blackboard.sejong.ac.kr/learn/api/v1/users/$userId/memberships?expand=course.effectiveAvailabilty"
 
         val allCoursesResponse = Jsoup.connect(url)
@@ -105,17 +104,16 @@ object Login {
             }
         }
 
-        insertUser(userId, "최옐인", id, pw, coursesId)
+        insertUser(userId, "최옐인", id, pw, coursesId, context)
     }
 
-    private fun insertUser(userId: String, name:String, bbId:String, bbPassword:String, courses: List<String>) {
+    private fun insertUser(userId: String, name:String, bbId:String, bbPassword:String, courses: List<String>, context: Context) {
         try {
             var newUser = User(userId, name, bbId, bbPassword, courses)
-            val db = UserDatabase.getInstance(MainActivity.context())
+            val db = UserDatabase.getInstance(context)
 
             CoroutineScope(Dispatchers.IO).launch { // 비동기
                 db!!.userDao().insert(newUser)
-                println(db)
             }
         } catch (e: java.lang.Exception) {
             println("Insert 에러 - $e")
