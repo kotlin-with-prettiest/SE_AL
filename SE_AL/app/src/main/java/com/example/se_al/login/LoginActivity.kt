@@ -37,31 +37,26 @@ class LoginActivity : AppCompatActivity() {
         //로그인 버튼
         btn_login.setOnClickListener {
 
-<<<<<<< HEAD
+            // 입력된 아이디 비번 값을 가져와서 로그인(계정) DB 생성
+            // 계정 정보(아이디, 비번)는 LoginUIS 에서 직접 가져와서 쓰기
             val id = editTextId.text.toString()
             val pw = editTextPassword.text.toString()
 
 //            checkIdPw(id, pw)
 
 
-
-=======
-            // 입력된 아이디 비번 값을 가져와서 로그인(계정) DB 생성
-            // 계정 정보(아이디, 비번)는 LoginUIS 에서 직접 가져와서 쓰기
-
             //참이면 로그인 성공한거
-           doAsync {
-           if(firstBlackBoardLogin()){
-               Log.d("로그인","성공")
-           }
-           else{//로그인 실패 처리
-               Log.d("로그인","실패")
-           }}
+            doAsync {
+                if (firstBlackBoardLogin()) {
+                    Log.d("로그인", "성공")
+                } else {//로그인 실패 처리
+                    Log.d("로그인", "실패")
+                }
+            }
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
             Log.d(TAG, "main Activity")
->>>>>>> 4962fd981415f957326675737433348fb184f792
             CloseKeyboard()
 
 //            login()
