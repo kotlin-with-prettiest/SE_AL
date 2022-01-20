@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
@@ -35,20 +36,22 @@ class LoginActivity : AppCompatActivity() {
             CloseKeyboard()
         }
 
+
         //로그인 버튼
         btn_login.setOnClickListener {
 
             // 입력된 아이디 비번 값을 가져와서 로그인(계정) DB 생성
             // 계정 정보(아이디, 비번)는 LoginUIS 에서 직접 가져와서 쓰기
+            val id = editTextId.text.toString()
+            val pw = editTextPassword.text.toString()
 
-            val id = findViewById<TextView>(R.id.editTextId).text.toString()
-            val pw = findViewById<TextView>(R.id.editTextPassword).text.toString()
+//            checkIdPw(id, pw)
             val intent = Intent(this, MainActivity::class.java)
 
             doAsync {
                // 로그인 성공
                if (firstBlackBoardLogin(id, pw)) {
-                   Log.d("로그인","성공")
+                   Log.d(TAG,"성공")
 
                    startActivity(intent)
                    finish()
@@ -59,7 +62,7 @@ class LoginActivity : AppCompatActivity() {
                }
                // 로그인 실패
                else {
-                   Log.d("로그인","실패")
+                   Log.d(TAG,"실패")
 
                    runOnUiThread {
                        Toast.makeText(this@LoginActivity, "아이디와 비밀번호를 다시 확인하세요. ", Toast.LENGTH_SHORT).show()
