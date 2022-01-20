@@ -1,13 +1,14 @@
 package com.example.se_al.data.exam
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface ExamDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(exam: Exam)
+
+    @Update
+    fun update(exam: Exam)
 
     @Query("SELECT * FROM Exam")
     fun getAll(): List<Exam>

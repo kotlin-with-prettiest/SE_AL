@@ -4,7 +4,7 @@ import androidx.room.*
 
 @Dao
 interface CourseDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(course: Course)
 
     @Update

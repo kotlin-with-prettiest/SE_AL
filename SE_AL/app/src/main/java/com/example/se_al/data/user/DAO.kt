@@ -6,7 +6,7 @@ import androidx.room.*
 
 @Dao
 interface DAO {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(user: User)
 
     @Update

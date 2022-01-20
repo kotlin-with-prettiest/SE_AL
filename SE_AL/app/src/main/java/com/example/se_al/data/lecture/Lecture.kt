@@ -8,7 +8,5 @@ data class Lecture(
     var course_id: String,
     var course_name: String,
     var lecture_week: String,
-    var lecture_id: String
-){
-    @PrimaryKey(autoGenerate = true) var id: Int = 0
-}
+    @PrimaryKey var lecture_id: String
+)

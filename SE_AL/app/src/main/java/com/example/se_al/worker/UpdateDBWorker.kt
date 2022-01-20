@@ -35,7 +35,7 @@ class UpdateDBWorker(appContext: Context, parameters: WorkerParameters) :
         try {
             Log.d("test","드가유")
             doAsync {
-                val uisCookies = uisLogin("18011522","tjsdud5139")
+                val uisCookies = uisLogin("","")
 
                 val loginResponse =
                     Jsoup.connect("https://portal.sejong.ac.kr/jsp/login/bbfrmv3.jsp")
@@ -103,6 +103,7 @@ class UpdateDBWorker(appContext: Context, parameters: WorkerParameters) :
         val allCoursesResponse = Jsoup.connect(url)
             .cookies(session)
             .ignoreContentType(true)
+            .ignoreHttpErrors(true)
             .get();
 
         val jsonObject = JSONObject(allCoursesResponse.body().text())
@@ -148,9 +149,6 @@ class UpdateDBWorker(appContext: Context, parameters: WorkerParameters) :
 
         insertUser(userId, "최예린", "bbid", "bbpw", coursesId) // ** 사용자 insert
 
-//        runOnUiThread {
-//            //11//textView.text = stringForArray
-//        }
 
         doAsync {
             getCalendars(session)
@@ -165,9 +163,15 @@ class UpdateDBWorker(appContext: Context, parameters: WorkerParameters) :
         val content = Jsoup.connect(url)
             .cookies(session)
             .ignoreContentType(true)
+            .ignoreHttpErrors(true)
             .get();
 
         val jsonObject = JSONObject(content.body().text())
+
+        if (!jsonObject.has("results")) {
+            return
+        }
+
         val resultsArray = jsonObject.getJSONArray("results")
 
         for (i in 0 until resultsArray.length()) { // 특정 코스에 있는 메뉴 개수만큼 실행
@@ -180,9 +184,9 @@ class UpdateDBWorker(appContext: Context, parameters: WorkerParameters) :
             if (title.contains("강의") || title.contains("과제") || title.contains("시험") || title.contains("영상") || title.contains("Lectures") || title.contains("Exam") || title.contains("Assignments"))
             {
                 insertMenu(courseId, courseName, title, contentId)
-                doAsync {
-                    getContent(title, courseId, contentId, session)
-                }
+//                doAsync {
+//                    getContent(title, courseId, contentId, session)
+//                }
                 // TODO: 과제
                 if (title.contains("과제") || title.contains("Assignments")) {
                     doAsync {
@@ -226,9 +230,15 @@ class UpdateDBWorker(appContext: Context, parameters: WorkerParameters) :
         val content = Jsoup.connect(url)
             .cookies(session)
             .ignoreContentType(true)
+            .ignoreHttpErrors(true)
             .get();
 
         val jsonObject = JSONObject(content.body().text())
+
+        if (!jsonObject.has("results")) {
+            return
+        }
+
         val resultsArray = jsonObject.getJSONArray("results")
 
         for (i in 0 until resultsArray.length()) {
@@ -255,9 +265,15 @@ class UpdateDBWorker(appContext: Context, parameters: WorkerParameters) :
         val content = Jsoup.connect(url)
             .cookies(session)
             .ignoreContentType(true)
+            .ignoreHttpErrors(true)
             .get();
 
         val jsonObject = JSONObject(content.body().text())
+
+        if (!jsonObject.has("results")) {
+            return
+        }
+
         val resultsArray = jsonObject.getJSONArray("results")
 
         for (i in 0 until resultsArray.length()) {
@@ -314,21 +330,6 @@ class UpdateDBWorker(appContext: Context, parameters: WorkerParameters) :
         }
     }
 
-    fun deleteUser() {
-        try {
-            var userName = "전선영"
-            val db = UserDatabase.getInstance(applicationContext)
-
-            CoroutineScope(Dispatchers.IO).launch { // 비동기
-                db!!.userDao().deleteUserByName(userName)
-                printAllUsers()
-            }
-
-        } catch (e: java.lang.Exception) {
-            println("Delete 에러 - $e")
-        }
-    }
-
     fun printAllUsers() {
         try {
             val db = UserDatabase.getInstance(applicationContext)
@@ -355,18 +356,6 @@ class UpdateDBWorker(appContext: Context, parameters: WorkerParameters) :
         }
     }
 
-    fun printAllCourses() {
-        try {
-            val db = UserDatabase.getInstance(applicationContext)
-
-            CoroutineScope(Dispatchers.IO).launch { // 비동기
-                println(db!!.courseDao().getAll().toString())
-            }
-
-        } catch (e: java.lang.Exception) {
-            println("Print (course) 에러 - $e")
-        }
-    }
 
     fun insertContent(contentId: String, parentId:String, menuName:String, title: String) {
         try {
@@ -381,18 +370,6 @@ class UpdateDBWorker(appContext: Context, parameters: WorkerParameters) :
         }
     }
 
-    fun printAllContents() {
-        try {
-            val db = UserDatabase.getInstance(applicationContext)
-
-            CoroutineScope(Dispatchers.IO).launch { // 비동기
-                println(db!!.contentDao().getAll().toString())
-            }
-
-        } catch (e: java.lang.Exception) {
-            println("Print (content) 에러 - $e")
-        }
-    }
 
     fun insertChildContent(parentId: String, contentId: String, title: String, created: String) {
         try {
@@ -424,7 +401,7 @@ class UpdateDBWorker(appContext: Context, parameters: WorkerParameters) :
 
     fun allCourses(): List<Course> {
         val db = UserDatabase.getInstance(applicationContext)
-        lateinit var courses: List<Course>
+        var courses: List<Course> = listOf()
 
         CoroutineScope(Dispatchers.IO).launch { // 비동기
             courses = db!!.courseDao().getAll()
@@ -442,9 +419,15 @@ class UpdateDBWorker(appContext: Context, parameters: WorkerParameters) :
             val content = Jsoup.connect(url)
                 .cookies(session)
                 .ignoreContentType(true)
+                .ignoreHttpErrors(true)
                 .get();
 
             val jsonObject = JSONObject(content.body().text())
+
+            if (!jsonObject.has("results")) {
+                return
+            }
+
             val resultsArray = jsonObject.getJSONArray("results")
 
             for (i in 0 until resultsArray.length()) {
@@ -482,6 +465,7 @@ class UpdateDBWorker(appContext: Context, parameters: WorkerParameters) :
         val content = Jsoup.connect(url)
             .cookies(session)
             .ignoreContentType(true)
+            .ignoreHttpErrors(true)
             .get();
 
         val jsonObject = JSONObject(content.body().text())
@@ -526,9 +510,15 @@ class UpdateDBWorker(appContext: Context, parameters: WorkerParameters) :
         val content = Jsoup.connect(url)
             .cookies(session)
             .ignoreContentType(true)
+            .ignoreHttpErrors(true)
             .get();
 
         val jsonObject = JSONObject(content.body().text())
+
+        if (!jsonObject.has("results")) {
+            return
+        }
+
         val resultsArray = jsonObject.getJSONArray("results")
 
         for (i in 0 until resultsArray.length()) {
@@ -575,8 +565,8 @@ class UpdateDBWorker(appContext: Context, parameters: WorkerParameters) :
     }
 
     fun calendarQuery(sourceId: String): List<String> {
-        lateinit var startDate: String
-        lateinit var endDate: String
+        var startDate: String
+        var endDate: String
         val db = UserDatabase.getInstance(applicationContext)
 
         startDate = db!!.calendarDao().getStartDate(sourceId)
@@ -592,9 +582,15 @@ class UpdateDBWorker(appContext: Context, parameters: WorkerParameters) :
         val content = Jsoup.connect(url)
             .cookies(session)
             .ignoreContentType(true)
+            .ignoreHttpErrors(true)
             .get();
 
         val jsonObject = JSONObject(content.body().text())
+
+        if (!jsonObject.has("results")) {
+            return
+        }
+
         val resultsArray = jsonObject.getJSONArray("results")
 
         for (i in 0 until resultsArray.length()) { // 한 코스의 시험 개수만큼
@@ -660,9 +656,15 @@ class UpdateDBWorker(appContext: Context, parameters: WorkerParameters) :
         val content = Jsoup.connect(url)
             .cookies(session)
             .ignoreContentType(true)
+            .ignoreHttpErrors(true)
             .get();
 
         val jsonObject = JSONObject(content.body().text())
+
+        if (!jsonObject.has("results")) {
+            return
+        }
+
         val resultsArray = jsonObject.getJSONArray("results")
 
         for (i in 0 until resultsArray.length()) { // 한 코스의 주차수만큼
@@ -702,9 +704,15 @@ class UpdateDBWorker(appContext: Context, parameters: WorkerParameters) :
         val content = Jsoup.connect(url)
             .cookies(session)
             .ignoreContentType(true)
+            .ignoreHttpErrors(true)
             .get();
 
         val jsonObject = JSONObject(content.body().text())
+
+        if (!jsonObject.has("results")) {
+            return
+        }
+
         val resultsArray = jsonObject.getJSONArray("results")
 
         for (i in 0 until resultsArray.length()) {
@@ -736,6 +744,4 @@ class UpdateDBWorker(appContext: Context, parameters: WorkerParameters) :
             println("Insert (insertSubLecture) 에러 - $e")
         }
     }
-
-
 }

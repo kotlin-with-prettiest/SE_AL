@@ -4,7 +4,7 @@ import androidx.room.*
 
 @Dao
 interface ContentDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(content: Content)
 
     @Update
