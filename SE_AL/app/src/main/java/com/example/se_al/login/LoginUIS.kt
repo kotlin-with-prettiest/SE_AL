@@ -28,8 +28,8 @@ fun uisLogin(id:String, password:String): MutableMap<String, String> {
 * uis 로그인 세션으로 블랙보드에 로그인
 * 로그인 성공: true 리턴
 * 로그인 실패: false 리턴*/
-fun firstBlackBoardLogin():Boolean{
-    val uisCookies = uisLogin("","")
+fun firstBlackBoardLogin(id: String, pw: String):Boolean{
+    val uisCookies = uisLogin(id, pw)
 
     val loginResponse = Jsoup.connect("https://portal.sejong.ac.kr/jsp/login/bbfrmv3.jsp")
         .cookies(uisCookies)

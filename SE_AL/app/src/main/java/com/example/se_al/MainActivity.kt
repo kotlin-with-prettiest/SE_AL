@@ -53,6 +53,14 @@ class MainActivity : AppCompatActivity() {
     private val password = ""
     private val rtUrl = "blackboard.sejong.ac.kr"
 
+    companion object {
+        var instance: MainActivity? = null
+
+        fun context(): Context {
+            return instance!!.applicationContext
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
