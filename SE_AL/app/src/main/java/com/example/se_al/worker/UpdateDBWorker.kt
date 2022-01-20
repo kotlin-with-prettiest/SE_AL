@@ -35,7 +35,7 @@ class UpdateDBWorker(appContext: Context, parameters: WorkerParameters) :
         try {
             Log.d("test","드가유")
             doAsync {
-                val uisCookies = uisLogin("18011522","tjsdud5139")
+                val uisCookies = uisLogin("","")
 
                 val loginResponse =
                     Jsoup.connect("https://portal.sejong.ac.kr/jsp/login/bbfrmv3.jsp")

@@ -7,9 +7,7 @@ import androidx.room.PrimaryKey
 data class Announcement(
     var course_id: String,
     var course_name: String,
-    var announcement_id: String,
+    @PrimaryKey var announcement_id: String,
     var title: String,
     var body: String?
-){
-    @PrimaryKey(autoGenerate = true) var id: Int = 0
-}
+)
