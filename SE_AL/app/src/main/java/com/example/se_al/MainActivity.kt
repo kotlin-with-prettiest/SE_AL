@@ -28,6 +28,7 @@ import com.example.se_al.data.menu.Menu
 import com.example.se_al.data.sub_lecture.SubLecture
 import com.example.se_al.data.user.User
 import com.example.se_al.databinding.ActivityMainBinding
+import com.example.se_al.worker.NotiWorker
 import com.example.se_al.worker.UpdateDBWorker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -101,17 +102,24 @@ class MainActivity : AppCompatActivity() {
 
     private fun delayCreateWork(){
         backgroundCoroutineScope.launch {
-            createWorkManager()
+            createUpdateWorkManager()
+            createNotiWorkManager()
         }
     }
 
-    private fun createWorkManager(){
-
+    private fun createUpdateWorkManager(){
         val oneTimeWorkRequest = OneTimeWorkRequestBuilder<UpdateDBWorker>().
         setInitialDelay(1, TimeUnit.MINUTES).build()
 
         Log.d("test", "Init WorkManager")
         WorkManager.getInstance(applicationContext).enqueueUniqueWork(UpdateDBWorker.WORK_NAME, ExistingWorkPolicy.KEEP, oneTimeWorkRequest)
+    }
+    private fun createNotiWorkManager(){
+        val oneTimeWorkRequest = OneTimeWorkRequestBuilder<NotiWorker>().
+        setInitialDelay(1, TimeUnit.MINUTES).build()
+
+        Log.d("Noti", "Init WorkManager")
+        WorkManager.getInstance(applicationContext).enqueueUniqueWork(NotiWorker.WORK_NAME, ExistingWorkPolicy.KEEP, oneTimeWorkRequest)
     }
 
 
