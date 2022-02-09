@@ -1,6 +1,7 @@
 package com.example.se_al.ui.setting
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.se_al.R
+import com.example.se_al.data.UserDatabase
 import com.example.se_al.databinding.FragmentClassBaseBinding
 import com.example.se_al.databinding.FragmentClassListBinding
 import com.example.se_al.databinding.FragmentSettingBinding

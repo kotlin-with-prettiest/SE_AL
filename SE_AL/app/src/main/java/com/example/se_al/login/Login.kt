@@ -1,6 +1,8 @@
 package com.example.se_al.login
 
 import android.content.Context
+import android.util.Log
+import com.example.se_al.MainActivity
 import com.example.se_al.data.UserDatabase
 import com.example.se_al.data.user.User
 import kotlinx.coroutines.CoroutineScope

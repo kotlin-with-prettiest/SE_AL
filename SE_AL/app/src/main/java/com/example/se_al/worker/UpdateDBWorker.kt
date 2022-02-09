@@ -700,6 +700,7 @@ class UpdateDBWorker(appContext: Context, parameters: WorkerParameters) :
 
         val url =
             "https://blackboard.sejong.ac.kr/learn/api/public/v1/courses/$courseId/contents/$lectureId/children"
+//            "https://blackboard.sejong.ac.kr/learn/api/public/v1/courses/_69555_1/contents/$lectureId/children"
 
         val content = Jsoup.connect(url)
             .cookies(session)

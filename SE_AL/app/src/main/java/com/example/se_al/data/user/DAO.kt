@@ -20,4 +20,12 @@ interface DAO {
 
     @Query("DELETE FROM User WHERE name = :name")
     fun deleteUserByName(name: String)
+
+
+    @Query("SELECT name FROM User")
+    fun getName(): String
+
+    @Query("SELECT course_id FROM User")
+    fun getCourseid(): List<String>
+
 }

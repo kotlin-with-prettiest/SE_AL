@@ -22,4 +22,7 @@ interface CourseDao {
     // 수강하고 있는 모든 과목을 가져옴
     @Query("SELECT * FROM Course")
     fun getAllCourses(): List<Course>
+
+    @Query("SELECT course_name FROM Course")
+    fun getCoursesName(): String
 }

@@ -35,7 +35,7 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="50dp"
-                android:background="@color/purple_700"
+                android:background="#708B6CCF"
                 android:spinnerMode="dialog"
                 app:layout_constraintStart_toEndOf="@+id/fix_str_category_class"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -59,7 +59,7 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:background="@color/purple_200"
+                android:background="#70634C93"
                 android:spinnerMode="dialog"
                 app:layout_constraintStart_toEndOf="@+id/fix_str_category_menu"
                 app:layout_constraintTop_toBottomOf="@+id/fix_spinner_class" />
