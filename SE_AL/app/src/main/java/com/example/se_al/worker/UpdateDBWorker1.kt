@@ -1,7 +1,6 @@
 package com.example.se_al.worker
 
 import android.content.Context
-import android.content.Intent
 import android.util.Log
 import androidx.work.*
 import com.example.se_al.data.UserDatabase
@@ -16,8 +15,6 @@ import com.example.se_al.data.lecture.Lecture
 import com.example.se_al.data.menu.Menu
 import com.example.se_al.data.sub_lecture.SubLecture
 import com.example.se_al.data.user.User
-import com.example.se_al.login.LoginActivity
-import com.example.se_al.ui.setting.SettingPersonalInfoFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,17 +24,18 @@ import org.jsoup.Connection
 import org.jsoup.Jsoup
 import java.util.concurrent.TimeUnit
 
-class UpdateDBWorker (context: Context, workerParams: WorkerParameters) :
-    Worker(context, workerParams) {
+class UpdateDBWorker1(appContext: Context, parameters: WorkerParameters) :
+    CoroutineWorker(appContext, parameters) {
+
     companion object {
-        const val WORK_NAME = "UpdateDBWork"
+        const val WORK_NAME = "UpdateDB Work"
     }
 
-    override fun doWork(): Result {
+    override suspend fun doWork(): Result {
         try {
-            Log.d("test", "드가유")
+            Log.d("test","드가유")
             doAsync {
-                val uisCookies = uisLogin("", "")
+                val uisCookies = uisLogin("","")
 
                 val loginResponse =
                     Jsoup.connect("https://portal.sejong.ac.kr/jsp/login/bbfrmv3.jsp")
@@ -50,20 +48,23 @@ class UpdateDBWorker (context: Context, workerParams: WorkerParameters) :
 
                 callApi(location, session)
             }
+
+            val oneTimeWorkRequest =
+                OneTimeWorkRequestBuilder<UpdateDBWorker1>().setInitialDelay(1, TimeUnit.MINUTES).build()
+
+            WorkManager.getInstance(applicationContext)
+                .enqueueUniqueWork(WORK_NAME, ExistingWorkPolicy.REPLACE, oneTimeWorkRequest)
+
         } catch (e: Exception) {
-            return Result.failure()
+            Result.retry()
         }
 
         return Result.success()
     }
-
-    fun uisLogin(id: String, password: String): MutableMap<String, String> {
+    fun uisLogin(id:String, password:String): MutableMap<String, String> {
         val loginResponse = Jsoup.connect("https://portal.sejong.ac.kr/jsp/login/login_action.jsp")
             .header("Referer", "https://portal.sejong.ac.kr")
-            .header(
-                "User-Agent",
-                "Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0"
-            )
+            .header("User-Agent", "Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0")
             .data("id", id)
             .data("password", password)
             .data("rtUrl", "blackboard.sejong.ac.kr")
@@ -90,14 +91,12 @@ class UpdateDBWorker (context: Context, workerParams: WorkerParameters) :
     private fun getUserId(location: String): String {
         val doc = Jsoup.connect(location).get()
 
-        return doc.select("script#initial-context-script").toString()
-            .split("id\":\"")[2].split("\"")[0].replace(" ", "")
+        return doc.select("script#initial-context-script").toString().split("id\":\"")[2].split("\"")[0].replace(" ", "")
     }
 
     private fun getAllCourses(userId: String, session: Map<String, String>) {
         //11//val textView: TextView = findViewById<TextView>(R.id.textView)
-        val url =
-            "https://blackboard.sejong.ac.kr/learn/api/v1/users/$userId/memberships?expand=course.effectiveAvailabilty"
+        val url = "https://blackboard.sejong.ac.kr/learn/api/v1/users/$userId/memberships?expand=course.effectiveAvailabilty"
 
         //_66176_1
 
@@ -156,11 +155,7 @@ class UpdateDBWorker (context: Context, workerParams: WorkerParameters) :
         }
     }
 
-    private fun getMenus(
-        courseId: String,
-        courseName: String,
-        session: Map<String, String>
-    ) { // 코스마다 실행
+    private fun getMenus(courseId:String, courseName: String, session: Map<String, String>) { // 코스마다 실행
         // 메뉴 GET / INSERT
 
         val url = "https://blackboard.sejong.ac.kr/learn/api/public/v1/courses/$courseId/contents"
@@ -186,10 +181,8 @@ class UpdateDBWorker (context: Context, workerParams: WorkerParameters) :
             val title = iObject.getString("title")
 
             // TODO: 퀴즈
-            if (title.contains("강의") || title.contains("과제") || title.contains("시험") || title.contains(
-                    "영상"
-                ) || title.contains("Lectures") || title.contains("Exam") || title.contains("Assignments")
-            ) {
+            if (title.contains("강의") || title.contains("과제") || title.contains("시험") || title.contains("영상") || title.contains("Lectures") || title.contains("Exam") || title.contains("Assignments"))
+            {
                 insertMenu(courseId, courseName, title, contentId)
 //                doAsync {
 //                    getContent(title, courseId, contentId, session)
@@ -220,12 +213,7 @@ class UpdateDBWorker (context: Context, workerParams: WorkerParameters) :
         }
     }
 
-    private fun getContent(
-        menuName: String,
-        courseId: String,
-        contentId: String,
-        session: Map<String, String>
-    ) {
+    private fun getContent(menuName: String, courseId: String, contentId: String, session: Map<String, String>) {
         /*
          * 강의 자료 및 학습
          * -----
@@ -237,8 +225,7 @@ class UpdateDBWorker (context: Context, workerParams: WorkerParameters) :
          *
          * */
 
-        val url =
-            "https://blackboard.sejong.ac.kr/learn/api/public/v1/courses/$courseId/contents/$contentId/children"
+        val url = "https://blackboard.sejong.ac.kr/learn/api/public/v1/courses/$courseId/contents/$contentId/children"
 
         val content = Jsoup.connect(url)
             .cookies(session)
@@ -270,15 +257,10 @@ class UpdateDBWorker (context: Context, workerParams: WorkerParameters) :
         }
     }
 
-    private fun getContentChildren(
-        courseId: String,
-        parentId: String,
-        session: Map<String, String>
-    ) {
+    private fun getContentChildren(courseId: String, parentId: String, session: Map<String, String>) {
         //강의 1주차
 
-        val url =
-            "https://blackboard.sejong.ac.kr/learn/api/public/v1/courses/$courseId/contents/$parentId/children"
+        val url = "https://blackboard.sejong.ac.kr/learn/api/public/v1/courses/$courseId/contents/$parentId/children"
 
         val content = Jsoup.connect(url)
             .cookies(session)
@@ -334,13 +316,7 @@ class UpdateDBWorker (context: Context, workerParams: WorkerParameters) :
 //        }
 //    }
 
-    fun insertUser(
-        userId: String,
-        name: String,
-        bbId: String,
-        bbPassword: String,
-        courses: List<String>
-    ) {
+    fun insertUser(userId: String, name:String, bbId:String, bbPassword:String, courses: List<String>) {
         try {
             var newUser = User(userId, name, bbId, bbPassword, courses)
             val db = UserDatabase.getInstance(applicationContext)
@@ -381,7 +357,7 @@ class UpdateDBWorker (context: Context, workerParams: WorkerParameters) :
     }
 
 
-    fun insertContent(contentId: String, parentId: String, menuName: String, title: String) {
+    fun insertContent(contentId: String, parentId:String, menuName:String, title: String) {
         try {
             var newContent = Content(contentId, parentId, menuName, title)
             val db = UserDatabase.getInstance(applicationContext)
@@ -438,8 +414,7 @@ class UpdateDBWorker (context: Context, workerParams: WorkerParameters) :
         val courses = allCourses()
 
         for (course in courses) {
-            val url =
-                "https://blackboard.sejong.ac.kr/learn/api/public/v1/courses/${course.course_id}/announcements"
+            val url = "https://blackboard.sejong.ac.kr/learn/api/public/v1/courses/${course.course_id}/announcements"
 
             val content = Jsoup.connect(url)
                 .cookies(session)
@@ -469,13 +444,7 @@ class UpdateDBWorker (context: Context, workerParams: WorkerParameters) :
         }
     }
 
-    fun insertAnnouncement(
-        courseId: String,
-        courseName: String,
-        announcementId: String,
-        title: String,
-        body: String
-    ) {
+    fun insertAnnouncement(courseId: String, courseName: String, announcementId: String, title: String, body: String) {
         try {
             var newAnnouncement = Announcement(courseId, courseName, announcementId, title, body)
             val db = UserDatabase.getInstance(applicationContext)
@@ -488,12 +457,7 @@ class UpdateDBWorker (context: Context, workerParams: WorkerParameters) :
         }
     }
 
-    fun getAssignment(
-        courseId: String,
-        courseName: String,
-        menuId: String,
-        session: Map<String, String>
-    ) {
+    fun getAssignment(courseId: String, courseName: String, menuId: String, session: Map<String, String>) {
         val url =
             "https://blackboard.sejong.ac.kr/learn/api/public/v1/courses/$courseId/contents/$menuId/children"
 
@@ -513,7 +477,7 @@ class UpdateDBWorker (context: Context, workerParams: WorkerParameters) :
             val title = iObject.getString("title")
             var body: String? = null
 
-            if (iObject.has("body")) {
+            if(iObject.has("body")) {
                 body = iObject.getString("body")
             }
 
@@ -530,21 +494,11 @@ class UpdateDBWorker (context: Context, workerParams: WorkerParameters) :
             }
 
             var dueDate: List<String> = listOf("none", "none")
-            if (sourceId != null) {
+            if (sourceId != null)
+            {
                 dueDate = calendarQuery(sourceId)
             }
-            insertAssignment(
-                courseId,
-                courseName,
-                title,
-                body,
-                null,
-                assignmentId,
-                sourceId,
-                dueDate[0],
-                dueDate[1],
-                created
-            )
+            insertAssignment(courseId, courseName, title, body, null, assignmentId, sourceId, dueDate[0], dueDate[1], created)
         }
     }
 
@@ -584,14 +538,7 @@ class UpdateDBWorker (context: Context, workerParams: WorkerParameters) :
         }
     }
 
-    fun insertCalendar(
-        sourceId: String,
-        courseName: String,
-        startDate: String,
-        endDate: String,
-        title: String,
-        type: String
-    ) {
+    fun insertCalendar(sourceId: String, courseName: String, startDate: String, endDate: String, title: String, type: String) {
         try {
             var newCalendar = Calendar(sourceId, courseName, startDate, endDate, title, type)
             val db = UserDatabase.getInstance(applicationContext)
@@ -604,31 +551,9 @@ class UpdateDBWorker (context: Context, workerParams: WorkerParameters) :
         }
     }
 
-    fun insertAssignment(
-        courseId: String,
-        courseName: String,
-        title: String,
-        body: String?,
-        memo: String?,
-        assignmentId: String,
-        sourceId: String?,
-        startDate: String?,
-        endDate: String?,
-        created: String
-    ) {
+    fun insertAssignment(courseId: String, courseName: String, title: String, body: String?, memo: String?, assignmentId: String, sourceId: String?, startDate: String?, endDate: String?, created: String) {
         try {
-            var newAssignment = Assignment(
-                courseId,
-                courseName,
-                title,
-                body,
-                memo,
-                assignmentId,
-                sourceId,
-                startDate,
-                endDate,
-                created
-            )
+            var newAssignment = Assignment(courseId, courseName, title, body, memo, assignmentId, sourceId, startDate, endDate, created)
             val db = UserDatabase.getInstance(applicationContext)
 
             CoroutineScope(Dispatchers.IO).launch { // 비동기
@@ -650,12 +575,7 @@ class UpdateDBWorker (context: Context, workerParams: WorkerParameters) :
         return listOf(startDate, endDate)
     }
 
-    fun getExam(
-        courseId: String,
-        courseName: String,
-        menuId: String,
-        session: Map<String, String>
-    ) {
+    fun getExam(courseId: String, courseName: String, menuId: String, session: Map<String, String>) {
         val url =
             "https://blackboard.sejong.ac.kr/learn/api/public/v1/courses/$courseId/contents/$menuId/children"
 
@@ -716,31 +636,9 @@ class UpdateDBWorker (context: Context, workerParams: WorkerParameters) :
         }
     }
 
-    fun insertExam(
-        courseId: String,
-        courseName: String,
-        title: String,
-        body: String?,
-        memo: String?,
-        assignmentId: String,
-        sourceId: String?,
-        startDate: String?,
-        endDate: String?,
-        created: String
-    ) {
+    fun insertExam(courseId: String, courseName: String, title: String, body: String?, memo: String?, assignmentId: String, sourceId: String?, startDate: String?, endDate: String?, created: String) {
         try {
-            var newExam = Exam(
-                courseId,
-                courseName,
-                title,
-                body,
-                memo,
-                assignmentId,
-                sourceId,
-                startDate,
-                endDate,
-                created
-            )
+            var newExam = Exam(courseId, courseName, title, body, memo, assignmentId, sourceId, startDate, endDate, created)
             val db = UserDatabase.getInstance(applicationContext)
 
             CoroutineScope(Dispatchers.IO).launch { // 비동기
@@ -751,12 +649,7 @@ class UpdateDBWorker (context: Context, workerParams: WorkerParameters) :
         }
     }
 
-    fun getLecture(
-        courseId: String,
-        courseName: String,
-        menuId: String,
-        session: Map<String, String>
-    ) {
+    fun getLecture(courseId: String, courseName: String, menuId: String, session: Map<String, String>) {
         val url =
             "https://blackboard.sejong.ac.kr/learn/api/public/v1/courses/$courseId/contents/$menuId/children"
 
@@ -788,12 +681,7 @@ class UpdateDBWorker (context: Context, workerParams: WorkerParameters) :
         }
     }
 
-    fun insertLecture(
-        courseId: String,
-        courseName: String,
-        lectureWeek: String,
-        lectureId: String
-    ) {
+    fun insertLecture(courseId: String, courseName: String, lectureWeek: String, lectureId: String) {
         try {
             var newLecture = Lecture(courseId, courseName, lectureWeek, lectureId)
             val db = UserDatabase.getInstance(applicationContext)
@@ -806,12 +694,7 @@ class UpdateDBWorker (context: Context, workerParams: WorkerParameters) :
         }
     }
 
-    fun getSubLecture(
-        courseId: String,
-        courseName: String,
-        lectureId: String,
-        session: Map<String, String>
-    ) {
+    fun getSubLecture(courseId: String, courseName: String, lectureId: String, session: Map<String, String>) {
         // courseId: _69555_1
         // lectureId: _2759746_1
 
@@ -845,46 +728,13 @@ class UpdateDBWorker (context: Context, workerParams: WorkerParameters) :
                 body = iObject.getString("body")
             }
 
-            insertSubLecture(
-                courseId,
-                courseName,
-                title,
-                body,
-                null,
-                parentId,
-                subLectureId,
-                null,
-                null,
-                created
-            )
+            insertSubLecture(courseId, courseName, title, body, null, parentId, subLectureId, null, null, created)
         }
     }
 
-    fun insertSubLecture(
-        courseId: String,
-        courseName: String,
-        title: String,
-        body: String?,
-        memo: String?,
-        parentId: String,
-        subLectureId: String,
-        startDate: String?,
-        endDate: String?,
-        created: String
-    ) {
+    fun insertSubLecture(courseId: String, courseName: String, title: String, body: String?, memo: String?, parentId: String, subLectureId: String, startDate: String?, endDate: String?, created: String) {
         try {
-            var newSubLecture = SubLecture(
-                courseId,
-                courseName,
-                title,
-                body,
-                memo,
-                parentId,
-                subLectureId,
-                startDate,
-                endDate,
-                created
-            )
+            var newSubLecture = SubLecture(courseId, courseName, title, body, memo, parentId, subLectureId, startDate, endDate, created)
             val db = UserDatabase.getInstance(applicationContext)
 
             CoroutineScope(Dispatchers.IO).launch { // 비동기

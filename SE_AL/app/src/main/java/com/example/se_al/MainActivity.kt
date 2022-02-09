@@ -1,45 +1,24 @@
 package com.example.se_al
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.provider.DocumentsContract
 import android.util.Log
-import android.view.inputmethod.InputMethodManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.work.ExistingWorkPolicy
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
-import androidx.work.Worker
-import com.example.se_al.data.UserDatabase
-import com.example.se_al.data.announcement.Announcement
-import com.example.se_al.data.assignment.Assignment
-import com.example.se_al.data.calendar.Calendar
-import com.example.se_al.data.children_content.ChildrenContent
-import com.example.se_al.data.content.Content
-import com.example.se_al.data.course.Course
-import com.example.se_al.data.exam.Exam
-import com.example.se_al.data.lecture.Lecture
-import com.example.se_al.data.menu.Menu
-import com.example.se_al.data.sub_lecture.SubLecture
-import com.example.se_al.data.user.User
+import androidx.work.*
 import com.example.se_al.databinding.ActivityMainBinding
+import com.example.se_al.login.LoginActivity
 import com.example.se_al.worker.NotiWorker
 import com.example.se_al.worker.UpdateDBWorker
+import com.example.se_al.worker.UpdateDBWorker1
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.jetbrains.anko.doAsync
-import org.json.JSONObject
-import org.jsoup.Connection
-import org.jsoup.Jsoup
-import org.jsoup.nodes.Document
-import org.jsoup.nodes.DocumentType
-import java.lang.Exception
 import java.util.concurrent.TimeUnit
 
 val TAG = "main"
@@ -78,11 +57,28 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        delayCreateWork()
+        //delayCreateWork()
 
+        delayedInit();
         //login()
         //noti()
 
+    }
+
+    private fun delayedInit() {
+        backgroundCoroutineScope.launch {
+            startUpdatingDB();
+        }
+    }
+
+    private fun startUpdatingDB() {
+        val workRequest = PeriodicWorkRequestBuilder<UpdateDBWorker>(15, TimeUnit.MINUTES).addTag("WIFIJOB1").build()
+        WorkManager.getInstance(applicationContext).cancelAllWorkByTag("WIFIJOB1");
+        WorkManager.getInstance(applicationContext).enqueue(workRequest)
+
+//        val intent = Intent(this@SettingPersonalInfoFragment.context, LoginActivity::class.java)
+//        startActivity(intent)
+//        activity?.finish()
     }
 
 //    fun CloseKeyboard() {
@@ -108,11 +104,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createUpdateWorkManager(){
-        val oneTimeWorkRequest = OneTimeWorkRequestBuilder<UpdateDBWorker>().
+        val oneTimeWorkRequest = OneTimeWorkRequestBuilder<UpdateDBWorker1>().
         setInitialDelay(1, TimeUnit.MINUTES).build()
 
         Log.d("test", "Init WorkManager")
-        WorkManager.getInstance(applicationContext).enqueueUniqueWork(UpdateDBWorker.WORK_NAME, ExistingWorkPolicy.KEEP, oneTimeWorkRequest)
+        WorkManager.getInstance(applicationContext).enqueueUniqueWork(UpdateDBWorker1.WORK_NAME, ExistingWorkPolicy.KEEP, oneTimeWorkRequest)
     }
     private fun createNotiWorkManager(){
         val oneTimeWorkRequest = OneTimeWorkRequestBuilder<NotiWorker>().
